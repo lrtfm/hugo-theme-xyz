@@ -1,0 +1,5 @@
+{{ with $.googleSearchEngineID}}
+    <script async src="https://cse.google.com/cse.js?cx={{ . }}">
+    </script>
+    <div class="gcse-search"></div>
+{{ end }}

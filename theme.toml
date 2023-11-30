@@ -1,0 +1,21 @@
+name = 'xyz'
+license = 'MIT'
+licenselink = 'https://github.com/owner/repo/LICENSE'
+description = 'Theme description'
+
+# The home page of the theme, where the source can be found
+homepage = 'https://github.com/lrtfm/xyz'
+
+# If you have a running demo of the theme
+# demosite = 'https://lrtfm.github.io/xyz'
+
+# Taxonomy terms
+tags = ['blog']
+features = ['clean']
+
+
+# If the theme has a single author
+[author]
+  name = 'Zongze YANG'
+#   homepage = 'zzyang.net'
+

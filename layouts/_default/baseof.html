@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+  <header>
+    {{ partial "header.html" . }}
+  </header>
+  <div id="content">
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+    <div id="main">
+      {{ block "main" . }}{{ end }}
+    <footer>
+      {{ partial "footer.html" . }}
+    </footer>
+    </div>
+  </div>
+</body>
+</html>

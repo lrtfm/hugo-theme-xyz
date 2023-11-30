@@ -1,0 +1,7 @@
+{{- with site.Params.Header -}}
+  {{- . | safeHTML -}}
+{{- else -}}
+    <h1>{{- site.Title -}}</h1>
+{{- end -}}
+    
+    
