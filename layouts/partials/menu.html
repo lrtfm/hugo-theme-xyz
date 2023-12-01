@@ -16,13 +16,11 @@ Renders a menu for the given menu ID.
     <ul>
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
       <li>
-      {{ partial "search.html" site.Params }}
+        {{- partial "search.html" site.Params }}
       </li>
     </ul>
   </div>
 {{- end }}
-
-
 
 {{- define "partials/inline/menu/walk.html" }}
   {{- $page := .page }}

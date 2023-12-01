@@ -129,17 +129,63 @@ p code {
   border-radius: 4px;
 }
 
-.highlight pre {
-  overflow: auto;
-  padding: 16px;
-  font-size: 100%;
-  line-height: 1.45;
+div.highlight {
+  position: relative;
+  padding: 8px 12px 0px 12px;
   border-radius: 6px;
+  /* background-color: #272822; */
+  border: 1px solid #ccc;
 }
 
+div.highlight:has(table) {
+  padding-left: 3px;
+}
 
+div.highlight pre {
+  font-size: 100%;
+  line-height: 1.45;
+  margin: 0px;
+  padding-bottom: 8px;
+  /* background-color: #272822; */
+}
 
-@media only screen and (max-width: 600px) {
+div.highlight > pre {
+  overflow-y: auto;
+  overflow-x: scroll;
+}
+
+div.highlight table tr > td:nth-child(2) pre {
+  overflow-y: auto;
+  overflow-x: scroll;
+}
+
+div.highlight table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/*
+div.highlight table tr > td:first-child {
+  min-width: 1.5rem;
+  width: 1.5rem;
+}
+*/
+
+div.highlight .button-copy-code {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: .6rem;
+  padding: 1px 1px 0px 0px;
+}
+
+/*
+pre > .button-copy-code:focus {
+  background-color: #cecece;
+}
+*/
+
+@media only screen and (max-width: 800px) {
   #content {
     display: flex;
     flex-direction: column;
@@ -157,7 +203,7 @@ p code {
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
   }
 
   #sidebar ul li {
