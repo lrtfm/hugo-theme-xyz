@@ -222,3 +222,14 @@ pre > .button-copy-code:focus {
     display: none !important;
   }
 }
+
+/* Fixes iOS font render abnormally.
+   Reference:
+     https://stackoverflow.com/questions/38346494/why-is-flex-affecting-font-size-on-ios
+*/
+code {
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
