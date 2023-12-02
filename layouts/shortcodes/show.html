@@ -1,0 +1,16 @@
+{{- $filename := .Get "file" -}}
+{{- $language := .Get "lang" -}}
+{{- $options := .Get "opts" -}}
+{{- $start := .Get "start" -}}
+{{- $end := .Get "end" -}}
+
+{{- $content := (
+    printf "| Result | Code |\n | --- | --- |\n| %s | %s |\n"
+        (print `{{< render file="` $filename `" start=` $start ` end=` $end ` >}}`)
+        (print `{{< include file="` $filename `" start=` $start ` end=` $end ` lang="` $language `" opts="` $options `" >}}`)
+    )
+-}}
+
+<div class="table">
+{{ (print $content) | markdownify }}
+</div>

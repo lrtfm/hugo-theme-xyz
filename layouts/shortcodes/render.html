@@ -12,22 +12,17 @@
    * See also <https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown>
    */}}
 {{- $filename := .Get "file" -}}
-{{- $language := .Get "lang" -}}
 {{- $options := .Get "opts" -}}
 {{- $start := .Get "start" -}}
 {{- $end := .Get "end" -}}
 
-
-{{- $file := readFile $filename | safeHTML -}}
+{{- $file := readFile $filename -}}
 {{ if and $start $end  }}
-   {{- $extra := cond (not (not $options)) "," "" -}}
-   {{- $options = (print $options $extra "linenostart=" $start) -}}
-   {{/* https://discourse.gohugo.io/t/using-readfile-to-read-a-reduced-set-of-lines/24873/2 */}}
    {{ $file := split $file "\n" }}
    {{ $file := first (add 1 (sub $end $start)) (after (sub $start 1) $file) }}
    {{ $file := delimit $file "\n" }}
-   {{- highlight $file $language $options -}}
+   {{- markdownify $file | safeHTML -}}
 {{ else }}
-   {{- highlight $file $language $options -}}
+   {{- markdownify $file | safeHTML -}}
 {{ end }}
 
