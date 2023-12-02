@@ -1,33 +1,13 @@
 <!-- https://me.micahrl.com/blog/hugo-shortcode-importcode/ -->
-{{/* "Import" source code directly into the output HTML file, with syntax highlighting
-   *
-   * Note that you should call this shortcode with angle brackets, not %.
-   * e.g., put something like this in your content:
-   *     {{< importcode "filename.py" "python3" >}}
-   * If you use the {{% import ... %}} style syntax,
-   * it assumes the output of this shortcode is _markdown_,
-   * which can contain HTML,
-   * but will break for nontrivial code blocks
-   * e.g. comments prefixed with '#' will be interpreted as Markdown titles.
-   * See also <https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown>
-   */}}
+{{- $language := (or (.Get "lang") "") -}}
+{{- $options := (or (.Get "opts") "") -}}
 {{- $filename := .Get "file" -}}
-{{- $language := .Get "lang" -}}
-{{- $options := .Get "opts" -}}
 {{- $start := .Get "start" -}}
 {{- $end := .Get "end" -}}
 
-
-{{- $file := readFile $filename | safeHTML -}}
 {{ if and $start $end  }}
    {{- $extra := cond (not (not $options)) "," "" -}}
    {{- $options = (print $options $extra "linenostart=" $start) -}}
-   {{/* https://discourse.gohugo.io/t/using-readfile-to-read-a-reduced-set-of-lines/24873/2 */}}
-   {{ $file := split $file "\n" }}
-   {{ $file := first (add 1 (sub $end $start)) (after (sub $start 1) $file) }}
-   {{ $file := delimit $file "\n" }}
-   {{- highlight $file $language $options -}}
-{{ else }}
-   {{- highlight $file $language $options -}}
 {{ end }}
-
+{{- $file := partial "utils/readfile.html" (dict "file" $filename "start" $start "end" $end) -}}
+{{- highlight $file $language $options -}}

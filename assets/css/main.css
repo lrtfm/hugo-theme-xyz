@@ -197,6 +197,13 @@ div.table > table td {
   border-radius: 6px;
 }
 
+div.table > table th {
+  text-align: left;
+  font-weight: normal;
+  font-style: italic;
+  font-size: xx-small;
+}
+
 @media only screen and (max-width: 800px) {
   #content {
     display: flex;
@@ -254,4 +261,23 @@ code {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+}
+
+
+/* override styles when printing */
+@media print {
+
+  #content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  body {
+    overflow: visible;
+  }
+
 }

@@ -1,0 +1,21 @@
+{{- /*
+Read specific lines from a file.
+
+@context {file} file name.
+@context {start} start line number.
+@context {end} end line number.
+
+@example: {{ partial "utils/readfile.html" (dict "file" /your/file.md "start" 1 "end" 3) }}
+*/}}
+
+{{- $file := .file }}
+{{- $start := .start }}
+{{- $end := .end }}
+
+{{- $content := readFile $file -}}
+{{ if and $start $end  }}
+  {{ $content = split $file "\n" }}
+  {{ $content = first (add 1 (sub $end $start)) (after (sub $start 1) $file) }}
+  {{ $content = delimit $file "\n" }}
+{{ end }}
+{{- $content | safeHTML -}}

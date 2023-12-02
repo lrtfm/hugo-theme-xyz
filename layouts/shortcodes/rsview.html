@@ -1,0 +1,39 @@
+{{/*
+  rsview: render a table with the rendered content and the source code
+  */}}
+{{- $language := (or (.Get "lang") "") -}}
+{{- $options := (or (.Get "opts") "") -}}
+
+{{ if (not $language) }}
+  {{- $extra := cond (not (not $options)) "," "" -}}
+  {{- $options = (print $options $extra "guessSyntax=true") -}}
+{{ end }}
+{{- $content := "" -}}
+
+{{- if strings.ContainsNonSpace .Inner }}
+  {{- $content = .Inner -}}
+{{ else }}
+  {{- $content = partial "utils/readfile.html" (
+    dict "file" (.Get "file") "start" (.Get "start") "end" (.Get "end")) -}}
+{{ end }}
+{{/* check if the content is correct
+  <div style="background-color: aqua;">
+  {{ replace $content "\n" "\\n" }}
+  </div>
+  */}}
+{{- $render := (markdownify $content | safeHTML) -}}
+{{- $source := (highlight (trim $content "\n") $language $options) -}}
+<div class="table">
+  <table>
+    <tr>
+      <th>Render</th>
+      <th>Source</th></tr>
+    <tr>
+    <td> {{- $render -}} </td>
+    <td> {{- $source -}}</td>
+    </tr>
+    {{ if (eq (not (.Get "debug")) false) }}
+      <tr><td colspan="2"> {{- $content -}} </td></tr>
+    {{ end }}
+  </table>
+</div>
