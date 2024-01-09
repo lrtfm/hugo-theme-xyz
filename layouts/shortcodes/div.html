@@ -1,3 +1,7 @@
-<div class="{{ .Get "class" }}">
-    {{ markdownify .Inner }}
+{{- $attr := "" }}
+{{- range $k, $v := $.Params }}
+    {{- $attr = (printf "%s %s=\"%s\"" $attr $k $v) }}
+{{- end }}
+<div {{ $attr | safeHTMLAttr }} >
+    {{ .Inner }}
 </div>

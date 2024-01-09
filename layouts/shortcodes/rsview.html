@@ -5,11 +5,13 @@
 {{- $options := (or (.Get "opts") "") -}}
 
 {{ if (not $language) }}
-  {{- $extra := cond (not (not $options)) "," "" -}}
-  {{- $options = (print $options $extra "guessSyntax=true") -}}
+  {{- $options = (print $options ",guessSyntax=true") -}}
 {{ end }}
+{{ if (.Get "start") }}
+  {{- $options = (print $options ",linenostart=" (.Get "start")) -}}
+{{ end }}
+{{- $options = (trim $options ",") -}}
 {{- $content := "" -}}
-
 {{- if strings.ContainsNonSpace .Inner }}
   {{- $content = .Inner -}}
 {{ else }}
@@ -21,7 +23,8 @@
   {{ replace $content "\n" "\\n" }}
   </div>
   */}}
-{{- $render := (markdownify $content | safeHTML) -}}
+{{/*- $render := ($content | markdownify) -*/}}
+{{- $render := ($content | $.Page.RenderString ) -}}
 {{- $source := (highlight (trim $content "\n") $language $options) -}}
 <div class="table">
   <table>
@@ -33,7 +36,12 @@
     <td> {{- $source -}}</td>
     </tr>
     {{ if (eq (not (.Get "debug")) false) }}
-      <tr><td colspan="2"> {{- $content -}} </td></tr>
+      <tr><td colspan="2" style="position: relative">
+        <div class="_debug_">CONTENT</div>
+        {{- printf "%s" (replace $content "\n" "\\n") -}} </td></tr>
+      <tr><td colspan="2" style="position: relative">
+        <div class="_debug_">RENDER</div>
+        {{- printf "%s" (replace $render "\n" "\\n") -}} </td></tr>
     {{ end }}
   </table>
 </div>

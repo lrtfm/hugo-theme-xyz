@@ -1,0 +1,20 @@
+{{- $content := .Inner -}}
+{{- $render :=  .Inner | markdownify -}}
+<div class="_test_">
+    <style>
+        ._test_ table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        ._test_ tr, ._test_ th, ._test_ td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <table>
+      <tr><th>.Inner</th><th>markdownify</th></tr>
+      <tr><td>{{- printf "%s" (replace $content "\n" "\\n") -}} </td>
+      <td>{{- printf "%s" (replace $render "\n" "\\n") -}} </td></tr>
+    </table>
+</div>

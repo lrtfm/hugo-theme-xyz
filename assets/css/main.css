@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Moon+Dance');
 body {
   color: #222;
   line-height: 1.5;
@@ -263,7 +264,6 @@ code {
   -webkit-text-size-adjust: 100%;
 }
 
-
 /* override styles when printing */
 @media print {
 
@@ -279,5 +279,33 @@ code {
   body {
     overflow: visible;
   }
-
 }
+
+/* for debug shortcodes */
+div._debug_ {
+    position: absolute;
+    content: "_DEBUG_";
+    left: 50%;
+    top: 50%;
+    /* transform: rotate(45deg); */
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    font-size: xx-large; 
+    font-family: Moon Dance; 
+    opacity: 0.5;
+}
+
+/* TODO: Auto Numbering */
+/*
+body {counter-reset: h2}
+h2 {counter-reset: h3}
+h3 {counter-reset: h4}
+h4 {counter-reset: h5}
+
+article[autonumbering] h2:before {counter-increment: h2; content: counter(h2) ". "}
+article[autonumbering] h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+article[autonumbering] h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
+
+article[autonumbering] .toc__menu ul { counter-reset: item }
+article[autonumbering] .toc__menu li a:before { content: counters(item, ".") ". "; counter-increment: item }
+*/

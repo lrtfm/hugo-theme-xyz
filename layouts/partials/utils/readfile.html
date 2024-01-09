@@ -13,9 +13,9 @@ Read specific lines from a file.
 {{- $end := .end }}
 
 {{- $content := readFile $file -}}
-{{ if and $start $end  }}
-  {{ $content = split $file "\n" }}
-  {{ $content = first (add 1 (sub $end $start)) (after (sub $start 1) $file) }}
-  {{ $content = delimit $file "\n" }}
-{{ end }}
+{{- if and $start $end  }}
+  {{- $content = split $content "\n" }}
+  {{- $content = first (add 1 (sub $end $start)) (after (sub $start 1) $content) }}
+  {{- $content = delimit $content "\n" }}
+{{- end }}
 {{- $content | safeHTML -}}
